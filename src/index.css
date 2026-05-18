@@ -1,0 +1,83 @@
+/* src/index.css or src/reset.css */
+
+/* 1. Use a more-intuitive box-sizing model for everything */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+/* 2. Remove default margins and paddings so layout behavior is predictable */
+* {
+    margin: 0;
+    padding: 0;
+}
+
+/* 3. Allow percentage-based heights in the application */
+html, body, #root {
+    height: 100%;
+}
+
+/* 4. Improve media defaults and prevent overflow issues */
+img, picture, video, canvas, svg {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+/* 5. Remove built-in form typography inheritance quirks */
+input, button, textarea, select {
+    font: inherit;
+}
+
+/* 6. Avoid text overflows */
+p, h1, h2, h3, h4, h5, h6 {
+    overflow-wrap: break-word;
+}
+
+/* 7. Set up base body styles for clean rendering */
+body {
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: #ffffff; /* Fallback background */
+    color: #1a1a1a;            /* Fallback dark text */
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+
+/* 8. Clean up standard list bulleting and link lines (optional but highly recommended) */
+ul, ol {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+button {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+/* VARIABLES */
+
+:root {
+    --bg: #F9F9F9;
+    --default__borders: #E0E0E0;
+    --secondary__section: #CAD7CB;
+    --primary__green: #78CC7B;
+    --primary__green__border: #69B06C;
+    --accent__orange: #FF9800;
+    --main__text: #333333;
+    --secondary__text: #666666;
+
+/*    Heading styles*/
+    --font-heading-family: 'Poppins', sans-serif;
+    --font-heading-size: 48px;
+    --font-heading-weight: 900;
+
+/*    Body text*/
+    --font-body-family: 'Open Sans', sans-serif;
+    --font-body-size: 18px;
+    --font-body-weight: 400;
+}
