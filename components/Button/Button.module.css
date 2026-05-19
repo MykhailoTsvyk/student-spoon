@@ -1,0 +1,36 @@
+/* Button.module.css */
+
+.baseBtn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    font-family: var(--font-heading-family);
+    font-weight: 700;
+    font-size: 24px;
+    color: var(--main__text);
+    padding: 14px 45px;
+    border-radius: 12px;
+    transition: transform 0.1s ease, background-color 0.2s ease, filter 0.2s ease;
+}
+
+/* Variant Specific Styling */
+.primary {
+    background-color: var(--primary__green); /* #78CC7B */
+    border: 2px solid #69B06C;
+}
+
+.orange {
+    background-color: var(--accent__orange); /* #FF9800 */
+}
+
+/* Premium Hover & Active interactions */
+.baseBtn:hover {
+    /* Making it slightly brighter on hover without needing a brand new variable color */
+    filter: brightness(1.05);
+}
+
+.baseBtn:active {
+    /* Subtle mechanical press down sensation when clicked */
+    transform: scale(0.97);
+}

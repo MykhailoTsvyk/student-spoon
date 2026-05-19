@@ -1,0 +1,24 @@
+.hero__container {
+    width: 630px;
+    padding-top: 117px;
+    display: flex;
+    flex-direction: column;
+    gap: 33px;
+}
+
+.hero__h1 {
+    color: var(--main__text);
+    font-size: var(--font-heading-size);
+    line-height: var(--font-heading-line-height);
+}
+
+.hero__p {
+    font-family: var(--font-body-family);
+    color: var(--secondary__text);
+    font-size: var(--font-body-size);
+    font-weight: var(--font-body-weight);
+}
+
+.stats__container {
+    background: var(--secondary__section);
+}

@@ -1,0 +1,82 @@
+.header__navbar {
+    display: flex;
+    justify-content: space-between;
+    padding: 26px 0px;
+}
+
+.header__menu {
+    display: flex;
+    gap: 63px;
+    align-items: center;
+}
+
+
+
+
+.footer {
+    background: var(--main__text);
+}
+
+.footer__flex {
+    display: flex;
+    padding-top: 62px;
+}
+
+.footer__nav {
+    margin-left: 100px;
+    display: flex;
+    gap: 90px;
+    align-items: center;
+}
+
+.footer__copyright {
+    text-align: center;
+    padding-top: 35px;
+    padding-bottom: 17px;
+    color: var(--secondary__text);
+}
+
+.link {
+    font-family: var(--font-heading-family);
+    font-size: 32px;
+    font-weight: var(--font-heading-weight);
+    position: relative;
+    display: inline-block;
+    transition: color 0.3s ease;
+}
+
+.link__footer {
+    color: var(--bg);
+}
+
+.link__header {
+    color: var(--main__text);
+}
+
+/* Create the underline */
+.link::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0); /* Hide it by default */
+    height: 3px;          /* Thickness of the line */
+    bottom: -4px;         /* Distance below the text */
+    left: 0;
+    background-color: var(--accent__orange);
+    transform-origin: bottom center;
+    transition: transform 0.3s ease;
+}
+
+/* Hover States */
+.link:hover {
+    color: var(--accent__orange);
+}
+
+.link:hover::after {
+    transform: scaleX(1); /* Slide the line out to full width */
+}
+
+.main__content {
+    min-height: 100%;
+    background: var(--bg);
+}
