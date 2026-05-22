@@ -1,11 +1,10 @@
-import React from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { PieChart } from "@mui/x-charts/PieChart";
 import { MainLayout } from "../../layout/MainLayout.jsx";
 import { Button } from "../../components/Button/Button.jsx";
 import styles from "./RecipePage.module.css";
 
-// 1. HARDCODED LOOKUP DATA (Ensures the component always finds the data regardless of import issues)
+
 const DATA_LOOKUP = [
     {
         id: "vietnamese-spicy-soup",
@@ -96,16 +95,10 @@ const DATA_LOOKUP = [
 export const RecipePage = () => {
     const { id } = useParams();
     const navigate = useNavigate();
-
-    // Debugging check: Open your inspect console (F12) to see exactly what ID is being read from the browser URL bar!
     console.log("Current URL Dynamic ID parameter detected:", id);
-
-    // Look up the recipe using the base dynamic ID string
-    // This splits off any appended load-more strings dynamically
     const baseId = id ? id.split("-load-")[0] : "";
     const recipe = DATA_LOOKUP.find(r => r.id === baseId);
 
-    // If no recipe matches, render a visible error container instead of a blank white screen
     if (!recipe) {
         return (
             <MainLayout>

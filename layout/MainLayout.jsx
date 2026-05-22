@@ -1,28 +1,33 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "../components/Button/Button.jsx";
-import darkLogo from "../src/assets/img/dark-logo.svg";
+import darkLogo from "../src/assets/img/dark-logo.svg"
 import lightLogo from "../src/assets/img/light-logo.svg";
 import styles from "./MainLayout.module.css";
 
-export const MainLayout = ({ children }) => {
+export const MainLayout = ({ children, isLoggedIn, handleLogoutFromApp }) => {
     const navigate = useNavigate();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-    // FIX: Lazy initialize the state directly from localStorage
     const [user, setUser] = useState(() => {
         const loggedInUser = localStorage.getItem("currentUser");
         return loggedInUser ? JSON.parse(loggedInUser) : null;
     });
 
-    // We can safely listen for shifts or keep this here if you need to perform other side-effects,
-    // but the synchronous setup warning is now completely gone.
     useEffect(() => {
-        // Any other non-state-setting initialization can go here if needed.
-    }, []);
+        const loggedInUser = localStorage.getItem("currentUser");
+        setUser(loggedInUser ? JSON.parse(loggedInUser) : null);
+    }, [isLoggedIn]);
 
     const handleLogout = () => {
         localStorage.removeItem("currentUser");
+
+        if (handleLogoutFromApp) {
+            handleLogoutFromApp();
+        } else {
+            localStorage.removeItem('isLoggedIn');
+        }
+
         setUser(null);
         setIsMenuOpen(false);
         navigate('/');
@@ -32,6 +37,8 @@ export const MainLayout = ({ children }) => {
         setIsMenuOpen(false);
         navigate(path);
     };
+
+    const hasActiveSession = isLoggedIn || !!user;
 
     return (
         <>
@@ -73,6 +80,19 @@ export const MainLayout = ({ children }) => {
                                     Recipes
                                 </a>
                             </li>
+
+                            {hasActiveSession && (
+                                <li>
+                                    <Button
+                                        variant="orange"
+                                        onClick={() => handleNavigation('/upload')}
+                                        className={styles.uploadBtn}
+                                        style={{ padding: '5px 15px', fontSize: '20px', minWidth: '40px' }}
+                                    >
+                                        +
+                                    </Button>
+                                </li>
+                            )}
                         </ul>
 
                         <div className={styles.authContainer}>
@@ -103,7 +123,7 @@ export const MainLayout = ({ children }) => {
                         </a>
                         <ul className={styles.footer__nav}>
                             <li><a className={`${styles.link__footer} ${styles.link}`} href="/">Home</a></li>
-                            <li><a className={`${styles.link__footer} ${styles.link}`} href="/recipes">Recipes</a></li>
+                            <li><a className={`${styles.link__footer} ${styles.link}`} href="/list">Recipes</a></li>
                         </ul>
                     </section>
                     <p className={styles.footer__copyright}>© {new Date().getFullYear()} Student Spoon</p>

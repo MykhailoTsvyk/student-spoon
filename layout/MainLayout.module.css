@@ -11,7 +11,7 @@
     padding: 26px 0px;
 }
 
-/* Flex wrapper linking navigation links & authentication items side-by-side */
+/* Flex wrapper linking navigation links and authentication items side-by-side */
 .menuWrapper {
     display: flex;
     align-items: center;
@@ -46,7 +46,6 @@
     transition: all 0.3s ease;
 }
 
-/* Pure CSS Morphing Burger Transformations to an 'X' */
 .burgerActive span:nth-child(1) {
     transform: translateY(9px) rotate(45deg);
 }
@@ -165,15 +164,12 @@
     color: #E53935;
 }
 
-/* ==========================================
-   RESPONSIVE DESIGN (Mobile Breakpoint)
-   ========================================== */
 @media (max-width: 768px) {
     .burger {
-        display: flex; /* Display Burger on Mobile Devices */
+        display: flex;
     }
 
-    /* Transform Layout into full screen Mobile Drawer Menu overlay */
+    /* Transform Layout into full screen Mobile Menu overlay */
     .menuWrapper {
         position: fixed;
         top: 0;
@@ -190,7 +186,7 @@
     }
 
     .menuOpen {
-        right: 0; /* Slide internal drawer window directly into view */
+        right: 0;
     }
 
     .header__menu {
@@ -199,10 +195,10 @@
     }
 
     .link {
-        font-size: 24px; /* Slightly adjust sizing scale down on smaller interfaces */
+        font-size: 24px; /* adjust sizing scale down on smaller interfaces */
     }
 
-    /* Footer Responsive Refactorings */
+    /* Footer Responsive*/
     .footer__flex {
         flex-direction: column;
         align-items: center;

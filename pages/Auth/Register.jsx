@@ -1,8 +1,8 @@
-// src/pages/Auth/Register.jsx
+
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from '../../components/Button/Button.jsx';
-import styles from './Auth.module.css'; // Importing shared styles
+import styles from './Auth.module.css';
 import logo from "../../src/assets/img/dark-logo.svg"
 
 export const Register = () => {

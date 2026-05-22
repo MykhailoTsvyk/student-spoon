@@ -10,7 +10,6 @@ import { MainLayout } from "../../layout/MainLayout.jsx";
 import { Button } from "../../components/Button/Button.jsx";
 
 const MOCK_RECIPES = [
-    // --- Round 1 (Images 1 to 4) ---
     {
         id: "vietnamese-spicy-soup",
         title: "Spicy Noodle Soup",
@@ -44,7 +43,6 @@ const MOCK_RECIPES = [
         macros: { protein: 32, carbs: 18, fat: 13, fiber: 5 }
     },
 
-    // --- Round 2 (Images 1 to 4) ---
     {
         id: "chicken-ramen-bowl",
         title: "Quick Chicken Ramen",

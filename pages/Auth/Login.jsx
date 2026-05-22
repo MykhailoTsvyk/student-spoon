@@ -1,11 +1,10 @@
-// src/pages/Auth/Login.jsx
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from '../../components/Button/Button.jsx';
 import styles from './Auth.module.css';
 import logo from "../../src/assets/img/dark-logo.svg";
 
-export const Login = () => {
+export const Login = ({ onLoginSuccess }) => {
     const navigate = useNavigate();
 
     const [email, setEmail] = useState('');
@@ -34,11 +33,15 @@ export const Login = () => {
 
             localStorage.setItem("currentUser", JSON.stringify(user));
 
+            if (onLoginSuccess) {
+                onLoginSuccess();
+            }
+
             setEmail('');
             setPassword('');
 
             setTimeout(() => {
-                navigate('/');
+                navigate('/list');
             }, 1500);
         } else {
             setMessage({ text: 'Incorrect password. Please try again.', isError: true });
@@ -51,7 +54,6 @@ export const Login = () => {
                 <div className={styles.authCard}>
                     <div className={styles.form__info__container}>
                         <h2 className={styles.authTitle}>Login</h2>
-                        {/* FIX 1: Wrapped navigate inside an arrow function */}
                         <a onClick={() => navigate('/')} style={{ cursor: 'pointer' }}>
                             <img src={logo} alt="Logo"/>
                         </a>
@@ -88,7 +90,6 @@ export const Login = () => {
 
                         <Button variant="primary" type="submit">Sign In</Button>
 
-                        {/* FIX 2: Changed type to "button" and wrapped navigate in an arrow function */}
                         <Button
                             variant="orange"
                             type="button"
