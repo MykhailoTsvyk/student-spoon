@@ -1,0 +1,65 @@
+/* src/components/RecipeCard/RecipeCard.module.css */
+
+.card {
+    background-color: #FFFFFF;
+    border-radius: 28px; /* Smooth rounded corners as seen in screenshot */
+
+    /* FIX: Force card to fill the parent container's slot (290px controlled by Main Layout) */
+    width: 100%;
+    height: 315px;
+
+    padding: 16px;
+    box-sizing: border-box;
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.04);
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+    /* Layout positioning */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Pushes content down, maximizing image space */
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0px 14px 35px rgba(0, 0, 0, 0.08);
+}
+
+.imageWrapper {
+    width: 100%;
+    /* Flexible height allocation based on the static parent card dimensions */
+    flex-grow: 1;
+    max-height: 200px; /* Prevents text elements below from crowding out */
+    border-radius: 24px;
+    overflow: hidden;
+}
+
+.image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Keeps image proportions regular without skewing */
+    display: block;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 12px 4px 0px 4px; /* Space out elements directly below the image bounding box */
+}
+
+.title {
+    font-family: var(--font-heading-family); /* Poppins */
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--main__text, #2D2D2D);
+    margin: 0;
+    text-transform: uppercase; /* Matches the bold 'FOOD' text treatment */
+}
+
+.time {
+    font-family: var(--font-body-family); /* Open Sans */
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--accent__orange, #D9534F); /* Uses your bright theme accent */
+}

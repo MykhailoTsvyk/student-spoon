@@ -1,0 +1,96 @@
+/* src/pages/Auth/Auth.module.css */
+
+.auth__bg {
+    height: 100%;
+    background: var(--secondary__section);
+}
+
+.authWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 75vh; /* Centers the card vertically on the screen */
+    padding: 40px 20px;
+    box-sizing: border-box;
+}
+
+.form__info__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.authCard {
+    background-color: #FFFFFF;
+    border-radius: 12px;
+    border: 2px solid var(--default__borders);
+    padding: 40px;
+    width: 100%;
+    max-width: 593px; /* Perfect form width */
+    box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.04); /* Soft modern shadow */
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+}
+
+.authTitle {
+    font-family: var(--font-heading-family); /* Poppins */
+    color: var(--main__text);
+    font-size: 32px;
+    font-weight: 700;
+    margin: 0;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.inputGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.inputGroup label {
+    font-family: var(--font-body-family);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--main__text);
+}
+
+.inputField {
+    padding: 14px 16px;
+    border: 1px solid #D1D1D1;
+    border-radius: 8px;
+    font-family: var(--font-body-family);
+    font-size: 16px;
+    color: var(--main__text);
+    outline: none;
+    transition: border-color 0.2s ease;
+}
+
+.inputField:focus {
+    border-color: var(--primary__green); /* Highlights green on click */
+}
+
+.errorMessage {
+    color: #E53935;
+    font-family: var(--font-body-family);
+    font-size: 14px;
+    margin: 0;
+}
+
+.successMessage {
+    color: #43A047;
+    font-family: var(--font-body-family);
+    font-size: 14px;
+    margin: 0;
+}
+
+@media (max-width: 500px){
+    .form__info__container img {
+        display: none;
+    }
+}

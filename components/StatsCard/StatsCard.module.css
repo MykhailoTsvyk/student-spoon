@@ -1,0 +1,26 @@
+.card {
+    background: var(--bg);
+    border: 2px solid var(--default__borders);
+    border-radius: 12px;
+    text-align: center;
+    padding: 35px 0;
+    width: 270px;
+}
+
+.icon {
+    margin: 0 auto;
+    margin-bottom: 30px;
+}
+
+.title {
+    font-family: var(--font-body-family);
+    font-size: var(--font-body-size);
+    font-weight: var(--font-body-weight);
+    color: var(--secondary__text);
+}
+
+.value {
+    font-family: var(--font-heading-family);
+    font-size: var(--font-heading-size);
+    color: var(--main__text);
+}

@@ -1,23 +1,93 @@
-import {Button} from "../components/Button/Button.jsx";
-import darkLogo from "../src/assets/img/dark-logo.svg"
-import lightLogo from "../src/assets/img/light-logo.svg"
-import styles from "./MainLayout.module.css"
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { Button } from "../components/Button/Button.jsx";
+import darkLogo from "../src/assets/img/dark-logo.svg";
+import lightLogo from "../src/assets/img/light-logo.svg";
+import styles from "./MainLayout.module.css";
 
-export const MainLayout = ({
-    children
-}) =>{
-    console.log(styles)
+export const MainLayout = ({ children }) => {
+    const navigate = useNavigate();
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+    // FIX: Lazy initialize the state directly from localStorage
+    const [user, setUser] = useState(() => {
+        const loggedInUser = localStorage.getItem("currentUser");
+        return loggedInUser ? JSON.parse(loggedInUser) : null;
+    });
+
+    // We can safely listen for shifts or keep this here if you need to perform other side-effects,
+    // but the synchronous setup warning is now completely gone.
+    useEffect(() => {
+        // Any other non-state-setting initialization can go here if needed.
+    }, []);
+
+    const handleLogout = () => {
+        localStorage.removeItem("currentUser");
+        setUser(null);
+        setIsMenuOpen(false);
+        navigate('/');
+    };
+
+    const handleNavigation = (path) => {
+        setIsMenuOpen(false);
+        navigate(path);
+    };
 
     return (
         <>
-            <header>
+            <header className={styles.header}>
                 <nav className={`container ${styles.header__navbar}`}>
-                    <img src={darkLogo} alt="Logo"/>
-                    <ul className={styles.header__menu}>
-                        <li><a className={`${styles.link__header} ${styles.link}`} href="">Home</a></li>
-                        <li><a className={`${styles.link__header} ${styles.link}`} href="">Recipes</a></li>
-                    </ul>
-                    <Button>Sign Up</Button>
+                    <img
+                        src={darkLogo}
+                        alt="Logo"
+                        onClick={() => handleNavigation('/')}
+                        style={{ cursor: 'pointer' }}
+                    />
+
+                    <div
+                        className={`${styles.burger} ${isMenuOpen ? styles.burgerActive : ""}`}
+                        onClick={() => setIsMenuOpen(!isMenuOpen)}
+                    >
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+
+                    <div className={`${styles.menuWrapper} ${isMenuOpen ? styles.menuOpen : ""}`}>
+                        <ul className={styles.header__menu}>
+                            <li>
+                                <a
+                                    className={`${styles.link__header} ${styles.link}`}
+                                    href="/"
+                                    onClick={(e) => { e.preventDefault(); handleNavigation('/'); }}
+                                >
+                                    Home
+                                </a>
+                            </li>
+                            <li>
+                                <a
+                                    className={`${styles.link__header} ${styles.link}`}
+                                    href="/list"
+                                    onClick={(e) => { e.preventDefault(); handleNavigation('/list'); }}
+                                >
+                                    Recipes
+                                </a>
+                            </li>
+                        </ul>
+
+                        <div className={styles.authContainer}>
+                            {user ? (
+                                <div className={styles.userInfo}>
+                                    <span className={styles.userName}>Hi, {user.fullName}</span>
+                                    <button onClick={handleLogout} className={styles.logoutBtn}>
+                                        Log Out
+                                    </button>
+                                </div>
+                            ) : (
+                                <Button onClick={() => handleNavigation('/login')}>Sign In</Button>
+                            )}
+                        </div>
+                    </div>
                 </nav>
             </header>
 
@@ -27,18 +97,18 @@ export const MainLayout = ({
 
             <footer className={styles.footer}>
                 <section className="container">
-
                     <section className={styles.footer__flex}>
-                        <a href=""><img src={lightLogo} alt=""/></a>
+                        <a href="/" onClick={(e) => { e.preventDefault(); handleNavigation('/'); }}>
+                            <img src={lightLogo} alt="Logo Light"/>
+                        </a>
                         <ul className={styles.footer__nav}>
-                            <li><a className={`${styles.link__footer} ${styles.link}`} href="">Home</a></li>
-                            <li><a className={`${styles.link__footer} ${styles.link}`} href="">Recipes</a></li>
+                            <li><a className={`${styles.link__footer} ${styles.link}`} href="/">Home</a></li>
+                            <li><a className={`${styles.link__footer} ${styles.link}`} href="/recipes">Recipes</a></li>
                         </ul>
                     </section>
-
                     <p className={styles.footer__copyright}>© {new Date().getFullYear()} Student Spoon</p>
-
                 </section>
             </footer>
         </>
-    )}
+    );
+};

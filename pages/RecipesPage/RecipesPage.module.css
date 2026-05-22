@@ -1,0 +1,41 @@
+.heading {
+    text-align: center;
+    padding: 50px 0;
+    font-family: var(--font-heading-family);
+    color: var(--main__text);
+    line-height: var(--font-heading-line-height);
+}
+
+.bg {
+    background: var(--secondary__section);
+    width: 100%;
+
+    /* FIX: Turn the parent into a column-based flex container */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* This perfectly centers the button horizontally */
+}
+
+.recipes__container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 50px 0;
+    justify-content: center; /* This keeps the row centered on the screen */
+}
+
+/* THE ULTIMATE FIX: Explicitly lock the flex-basis to 290px */
+.recipes__container > div {
+    flex: 0 0 290px; /* Do not grow, do not shrink, stay exactly 290px wide */
+    box-sizing: border-box;
+}
+
+.main__content {
+    min-height: 100%;
+    background: var(--bg);
+}
+
+.btn {
+
+    margin-bottom: 50px;
+}
