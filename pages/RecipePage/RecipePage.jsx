@@ -1,9 +1,9 @@
+import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { PieChart } from "@mui/x-charts/PieChart";
 import { MainLayout } from "../../layout/MainLayout.jsx";
 import { Button } from "../../components/Button/Button.jsx";
 import styles from "./RecipePage.module.css";
-
 
 const DATA_LOOKUP = [
     {
@@ -92,16 +92,35 @@ const DATA_LOOKUP = [
     }
 ];
 
-export const RecipePage = () => {
+export const RecipePage = ({ isLoggedIn }) => {
     const { id } = useParams();
     const navigate = useNavigate();
     console.log("Current URL Dynamic ID parameter detected:", id);
     const baseId = id ? id.split("-load-")[0] : "";
     const recipe = DATA_LOOKUP.find(r => r.id === baseId);
 
+    // Comments Section State
+    const [comments, setComments] = useState([
+        { id: 1, user: "ChefStudent", text: "Tried making a placeholder version of this, can't wait for the full feature!" },
+    ]);
+    const [newComment, setNewComment] = useState('');
+
+    const handleCommentSubmit = (e) => {
+        e.preventDefault();
+        if (!newComment.trim()) return;
+
+        const commentObj = {
+            id: Date.now(),
+            user: "You",
+            text: newComment
+        };
+        setComments([...comments, commentObj]);
+        setNewComment('');
+    };
+
     if (!recipe) {
         return (
-            <MainLayout>
+            <MainLayout isLoggedIn={isLoggedIn}>
                 <div style={{ textAlign: "center", padding: "100px 20px" }}>
                     <h2>Recipe data lookup failed</h2>
                     <p>Could not match route dynamic identifier: <strong>"{id}"</strong></p>
@@ -121,7 +140,7 @@ export const RecipePage = () => {
     ];
 
     return (
-        <MainLayout>
+        <MainLayout isLoggedIn={isLoggedIn}>
             <div className={`container ${styles.pageContainer}`}>
                 <button className={styles.backButton} onClick={() => navigate(-1)}>
                     ← Back to Recipes
@@ -171,6 +190,39 @@ export const RecipePage = () => {
                                 <li>Serve warm immediately and preserve standard leftovers.</li>
                             </ol>
                         </div>
+                    </div>
+                </div>
+
+                <hr className={styles.divider} />
+
+                {/* Interactive Comment Section */}
+                <div className={styles.commentSection}>
+                    <h3>Community Discussion</h3>
+
+                    {isLoggedIn ? (
+                        <form onSubmit={handleCommentSubmit} className={styles.commentForm}>
+                            <input
+                                type="text"
+                                value={newComment}
+                                onChange={(e) => setNewComment(e.target.value)}
+                                placeholder="Write a public comment..."
+                                required
+                            />
+                            <Button type="submit" variant="orange">Post</Button>
+                        </form>
+                    ) : (
+                        <div className={styles.loginWarning}>
+                            <p>⚠️ You must be logged in to participate in the discussion.</p>
+                        </div>
+                    )}
+
+                    <div className={styles.commentsList}>
+                        {comments.map(c => (
+                            <div key={c.id} className={styles.commentCard}>
+                                <strong>@{c.user}</strong>
+                                <p>{c.text}</p>
+                            </div>
+                        ))}
                     </div>
                 </div>
             </div>
